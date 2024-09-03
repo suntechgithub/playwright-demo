@@ -1,0 +1,13 @@
+{
+    "AppUrl": "https://devservices.peoriaaz.gov",
+    "Username": "TestUser",
+    "password": "TestUser@123",
+    "securityQuestion": "My favorite color?",
+    "answer": "Blue",
+    "firstName": "TestUser",
+    "lastName": "Automation",
+    "addressLine1": "Address Line 1",
+    "city": "City",
+    "zip": "123456789",
+    "mainPhoneNumber": "1234567891"
+}
