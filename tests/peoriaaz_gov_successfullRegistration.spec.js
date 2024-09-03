@@ -53,7 +53,7 @@ test('New User successfull Registration', async () => {
     await pomManager.userLoginPage.verifyUserSuccessfullRegistration()
 
     //Login with the same user and password 
-    await pomManager.userLoginPage.loginToApplication(testData.password)
+    await pomManager.userLoginPage.loginToApplicationWithOnlyPassword(testData.password)
 
     // Verify TestUser is logged in
     await pomManager.userHomePage.verifyUserLogin()

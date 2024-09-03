@@ -54,8 +54,10 @@ export class homePage {
         await this.addressLine1.fill(addressLine1);
         await this.cityTextFIeld.fill(city);
         await this.stateDropdown.selectOption('AK');
+        await this.zipTextField.clear()
         await this.zipTextField.pressSequentially(zip,{delay:100});
         await this.page.waitForTimeout(2000);
+        await this.mainPhoneNumberTextField.clear()
         await this.mainPhoneNumberTextField.pressSequentially(mainPhoneNumber,{delay:100});
         await this.mailIdTextField.fill(mailId);
         await this.continueButton.click();
