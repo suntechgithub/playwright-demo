@@ -19,7 +19,9 @@ export class userLoginPage {
         await this.page.waitForLoadState('networkidle')
     }
     async loginToApplication(username, password) {
+        await this.userNameTextField.clear()
         await this.userNameTextField.fill(username)
+        await this.passwordTextField.clear()
         await this.passwordTextField.fill(password);
         await this.loginLink.click();
         await this.page.waitForLoadState('networkidle')

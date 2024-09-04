@@ -3,7 +3,7 @@ import testData from '../testData/testData.json'
 import { utils } from '../utilities/utils';
 import { pomPage } from '../Pages/pomPage';
 
-test('New User successfull Registration', async () => {
+test.only('New User successfull Registration', async () => {
     // Launch incognito chrome browser using COMMAND with preloaded URL
     await utils.launchLocalBrowserWithURL(testData.AppUrl)
 
@@ -24,17 +24,24 @@ test('New User successfull Registration', async () => {
         await pomManager.humanVerificaionPage.verifyYouAreHuman()
     }
 
+    //Verify Accela Citizen Access home page
+    await pomManager.homePage.verifyHomePage()
+
     // Click on Register for an account
     await pomManager.homePage.registerAnAccount()
 
     // Generate New temporary MAil id with inbox using API call
     let mailId = await utils.generateMailId();
 
+    // Verify all the fields to be filled
+    await pomManager.homePage.verifyLoginInformationFields();
+
     //Fill all the details for User Registratiion
-    await pomManager.homePage.fillDetails(testData.Username +(Math.floor(Math.random() * 90000) + 10000) , mailId, testData.password, testData.securityQuestion, testData.answer)
+    let userName = testData.Username + (Math.floor(Math.random() * 90000) + 10000);
+    await pomManager.homePage.fillDetails(userName, mailId, testData.password, testData.securityQuestion, testData.answer)
 
     // Create and add a contact information
-    
+
     await pomManager.homePage.createContactInformation(testData.firstName, testData.lastName, testData.addressLine1, testData.city, testData.zip, testData.mainPhoneNumber, mailId)
 
     //Continue to register
@@ -53,7 +60,7 @@ test('New User successfull Registration', async () => {
     await pomManager.userLoginPage.verifyUserSuccessfullRegistration()
 
     //Login with the same user and password 
-    await pomManager.userLoginPage.loginToApplicationWithOnlyPassword(testData.password)
+    await pomManager.userLoginPage.loginToApplication(userName, testData.password)
 
     // Verify TestUser is logged in
     await pomManager.userHomePage.verifyUserLogin()
