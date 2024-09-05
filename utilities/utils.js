@@ -38,6 +38,7 @@ export class utils {
     static async connectToExistingBrowser(webSocketUrl) {
         const browser = await chromium.connectOverCDP(webSocketUrl);
         const contexts = browser.contexts();
+        await contexts[0].tracing.start({screenshots: true, snapshots: true })
         const pages = contexts[0].pages();
         let page = pages[0];
         await page.bringToFront();
