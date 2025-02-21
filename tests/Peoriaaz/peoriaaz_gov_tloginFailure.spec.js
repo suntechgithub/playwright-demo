@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
-import testData from '../testData/testData.json'
-import { utils } from '../utilities/utils';
-import { pomPage } from '../Pages/pomPage';
+import testData from '../../testData/testData.json'
+import { utils } from '../../utilities/utils';
+import { pomPage } from '../../Pages/pomPage';
 
 test('Failed Login Attempt with Incorrect Credentials', async () => {
     // Launch incognito chrome browser using COMMAND with preloaded URL

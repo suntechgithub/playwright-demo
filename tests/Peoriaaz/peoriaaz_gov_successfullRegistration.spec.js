@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
-import testData from '../testData/testData.json'
-import { utils } from '../utilities/utils';
-import { pomPage } from '../Pages/pomPage';
+import testData from '../../testData/testData.json'
+import { utils } from '../../utilities/utils';
+import { pomPage } from '../../Pages/pomPage';
 
 let page
 
