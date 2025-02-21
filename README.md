@@ -1,1 +1,1 @@
-# Test Automation using Playwright for the City Of Peoria
+# Test Automation using Playwright
