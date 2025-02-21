@@ -18,7 +18,7 @@ test.beforeEach(async () => {
 
 test('New User successfull Registration', async () => {
     const pomManager = new pomPage(page)
-    //Sync
+    // Wait for the application to completely load the page
     await page.waitForLoadState("networkidle");
 
     // Handling Human verification
