@@ -3,28 +3,23 @@ import { expect } from '@playwright/test';
 export class userHomePage {
     constructor(page) {
         this.page = page
-        this.loggedUserName = page.getByText('Hello, TestUser Automation')
-        this.logoutLink = page.getByRole('link', { name: 'Logout' })
-        this.registerNowLink = page.getByRole('link', { name: 'Register Now »' })
-        this.inavlidCredentialsErrorMessage = page.locator("//div[@id='messageSpanContent']")
+        this.trustBrowser = page.getByRole('button', { name: 'Yes, Trust this Browser' })
+        this.loggedUserName = page.getByRole('heading', { name: 'Welcome, Test1!' })
+        this.userIcon = page.getByRole('button', { name: 'Test1', exact: true })
+        this.logoutLink = page.getByRole('menuitem', { name: 'Log Out' })
     }
 
     async verifyUserLogin() {
-        await this.page.waitForTimeout(5000);
-        if (await this.inavlidCredentialsErrorMessage.count() > 0) {
-            await this.page.close()
-            throw new Error("Invalid Credentials")
+        if (await this.trustBrowser.isVisible()) {
+            await this.trustBrowser.click();
         }
+        await this.page.waitForTimeout(2000);
         await expect(this.loggedUserName, 'Verify logged in user').toBeVisible();
-        let headings = ['Announcements', 'Collections (0)', 'Cart (0)', 'Account Management', 'Logout']
-        for (let heading of headings) {
-            await expect(this.page.getByRole('link', { name: heading })).toBeVisible();
-        }
-        await expect(this.page.getByText('Logged in as:')).toBeVisible()
     }
 
     async logOutOfApplication() {
+        await this.userIcon.click();
+        await expect(this.logoutLink, 'LogOut option').toBeVisible();
         await this.logoutLink.click();
-        await expect(this.registerNowLink, 'Verify user is Logged out of application').toBeVisible();
     }
 }
