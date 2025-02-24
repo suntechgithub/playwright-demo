@@ -32,11 +32,14 @@ test('Employee Logs in and Submits Leave request', async ({ page }) => {
     const amountValue = await amountField.inputValue();
     expect(amountValue).toBe('8');
     await page.waitForTimeout(5000)
+    await page.getByRole('button', { name: 'Send Request' }).scrollIntoViewIfNeeded();
     await page.getByRole('button', { name: 'Send Request' }).click();
+
     
     //Logout of the application
     await page.getByRole('button', { name: 'Test1', exact: true }).click();
     await page.waitForTimeout(1000);
+    await page.getByRole('button', { name: 'Test1', exact: true }).click();
     await expect(page.getByRole('menuitem', { name: 'Log Out' })).toBeVisible();
     await page.getByRole('menuitem', { name: 'Log Out' }).click();
     await page.close();
@@ -62,6 +65,9 @@ test('Manager Logs in and Approves/Rejects Leave request', async ({ page }) => {
     await page.getByRole('link', { name: /Test1 QA/ }).first().hover();
     await page.waitForTimeout(1000);
     await page.getByRole('button', { name: 'Approve', exact: true }).click();
+
+    //Verify that Time Off Request pop up is visible
+    await expect (page.getByText(/Time off request/)).toBeVisible();
     
     //Logout of the application
     await page.getByRole('button', { name: 'Manager QA' }).click();
