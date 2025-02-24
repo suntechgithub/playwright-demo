@@ -6,6 +6,7 @@ const testData = require('/Git/playwright-demo-bamboo/testData/testData.json');
 test('Employee Logs in and Submits Leave request', async ({ page }) => {
 
     await page.goto('https://SunTech.bamboohr.com');
+    //await page.setViewportSize({ width: 1920, height: 1080 });
     await page.getByRole('textbox', { name: 'Email', exact: true }).fill(testData.EmployeeUsername);
     await page.getByRole('textbox', { name: 'Password' }).fill(testData.password);
     await page.getByRole('button', { name: 'Log In' }).click();
@@ -35,11 +36,11 @@ test('Employee Logs in and Submits Leave request', async ({ page }) => {
     await page.getByRole('button', { name: 'Send Request' }).scrollIntoViewIfNeeded();
     await page.getByRole('button', { name: 'Send Request' }).click();
 
+    await expect(page.getByRole('heading', { name: 'Welcome, Test1!' })).toBeVisible();
     
     //Logout of the application
     await page.getByRole('button', { name: 'Test1', exact: true }).click();
     await page.waitForTimeout(1000);
-    await page.getByRole('button', { name: 'Test1', exact: true }).click();
     await expect(page.getByRole('menuitem', { name: 'Log Out' })).toBeVisible();
     await page.getByRole('menuitem', { name: 'Log Out' }).click();
     await page.close();
